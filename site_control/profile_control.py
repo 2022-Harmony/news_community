@@ -9,8 +9,16 @@ SECRET_KEY = 'test'
 
 
 class ProfileHandler:
+    '''
+        profile site구성을 위해 필요한 페이지 랜더링, 이미지 변경, 북마크 게시글 조회등의 기능을 갖고있는 클래스
+    '''
     @staticmethod
     def profile_render(token, userid):
+        '''
+        :param token: 사용자 회원 정보를 파악하기 위해 받은 token 정보
+        :param userid: 사용자
+        :return:
+        '''
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
             status = (userid == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False

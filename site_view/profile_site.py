@@ -11,7 +11,7 @@ profile_page = Blueprint('profile', __name__)
 def profile(userid):
     ''' -CCH-
     분기에 따른 profile 랜더링 정보를 리턴해주는 api, (로그인 유저 접근시 profile_page, 그 밖의 경우 index.html 랜더링)
-    :param userid: index로 부터 넘어오는 사이트를 이용중인 사용자의 id
+    :param userid: index로 부터 넘어오는 원하는 프로필 페이지의 사용자 id
     :return profile.html or index.html: 사용자 토큰 유무(로그인 인가 파악)에 따라 페이지 리턴
     '''
     token_receive = request.cookies.get('mytoken') # 사용자의 토큰 정보를 받아,
