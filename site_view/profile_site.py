@@ -9,8 +9,13 @@ profile_page = Blueprint('profile', __name__)
 # 각 사용자의 프로필과 글을 모아볼 수 있는 공간
 @profile_page.route('/profile/<userid>')
 def profile(userid):
-    token_receive = request.cookies.get('mytoken')
-    return ProfileHandler.profile_render(token_receive, userid)
+    ''' -CCH-
+    분기에 따른 profile 랜더링 정보를 리턴해주는 api, (로그인 유저 접근시 profile_page, 그 밖의 경우 index.html 랜더링)
+    :param userid: index로 부터 넘어오는 사이트를 이용중인 사용자의 id
+    :return profile.html or index.html: 사용자 토큰 유무(로그인 인가 파악)에 따라 페이지 리턴
+    '''
+    token_receive = request.cookies.get('mytoken') # 사용자의 토큰 정보를 받아,
+    return ProfileHandler.profile_render(token_receive, userid) # api 요청시, 사용자의 id를 보고 분기처리
 
 
 # 사용자의 프로필 이미지 바꿀 수 있는 기능
