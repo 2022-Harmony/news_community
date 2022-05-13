@@ -16,15 +16,17 @@ class ProfileHandler:
     def profile_render(token, userid):
         '''
         :param token: 사용자 회원 정보를 파악하기 위해 받은 token 정보
-        :param userid: 사용자
-        :return:
+        :param userid: 프로필 페이지의 수정 권한 인가를 위해, token(실 사용자)안의 id와 비교하기 위한 요청받은 프로필 page의 id
+        :return profile.html(user_info, status) or index.html: 토큰 정보를 보고 권한이 있는 접근자인지 정보와 사용자 정보 리턴
+                                                               or jwt 토큰 검증 실패자 index.html로
+        ##이슈 존재 ##
         '''
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-            status = (userid == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
-            user_info = UserAdmin.users_find_one('user_id', userid)
+            status = (userid == payload["id"])                         # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
+            user_info = UserAdmin.users_find_one('user_id', userid)    # 해당 user의 id 정보를 토대로 유저 정보를 가져옴 (model.mongo로부터)
             return render_template('profile.html', user_info=user_info, status=status)
-        except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError): # jwt 토큰이 만료, 비인가 사용자면 index 페이지로 redirect
             return redirect(url_for("/"))
 
     @staticmethod
