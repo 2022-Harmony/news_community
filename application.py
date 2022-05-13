@@ -9,10 +9,10 @@ CSRFProtect(application)
 application.config["SECRET_KEY"] = 'chlcksgur12'
 
 #사이트 Routing#
-application.register_blueprint(main_site.main_page)
-application.register_blueprint(join_site.join_page)
-application.register_blueprint(detail_site.detail_page)
-application.register_blueprint(profile_site.profile_page)
+application.register_blueprint(main_site.main_page)          # index.html에 관련된 blueprint
+application.register_blueprint(join_site.join_page)          # login.html에 관련된 blueprint
+application.register_blueprint(detail_site.detail_page)      # detail.html에 관련된 blueprint
+application.register_blueprint(profile_site.profile_page)    # profile.html에 관련된 blueprint
 
 #외부 API(weather)
 application.register_blueprint(weather.weather_api)
