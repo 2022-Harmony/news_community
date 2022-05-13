@@ -2,8 +2,9 @@ $(document).ready(function () {
   listing();
 });
 
+// 카드박스 listing 함수 //
 const listing = () => {
-    // index.html에서 적용돼, /news로 ajax를 호출해 네이버 뉴스 관련 정보를 수집해 리턴
+    // index.html에서 적용돼, /news로 ajax를 호출해 네이버 뉴스 관련 정보를 수집해 리턴 //
     $.ajax({
         type: 'GET',
         url: '/news',
