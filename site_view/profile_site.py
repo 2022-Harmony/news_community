@@ -21,6 +21,10 @@ def profile(userid):
 # 사용자의 프로필 이미지 바꿀 수 있는 기능
 @profile_page.route('/update_profile', methods=['POST'])
 def save_img():
+    '''
+    클라이언트가 /update_profile 경로로 POST 요청을 하면 profile 정보 변경 성공 여부를 리턴하는 함수, (실패시 index.html 랜더링)
+    :return {result:bool, msg:String} or redirect('/'): 업데이트 성공 여부혹은, jwt 검사 실패시 index.html 페이지로 redirect
+    '''
     token_receive = request.cookies.get('mytoken')
     return ProfileHandler.change_img(token_receive)
 
