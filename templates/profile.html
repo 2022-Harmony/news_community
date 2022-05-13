@@ -35,8 +35,9 @@
     <script src="../static/js/profile_about.js"></script>
     <script src="../static/js/detail.js"></script>
     <script>
-        let now_user_id = "{{ user_info.user_id }}"
+        let now_user_id = "{{ user_info.user_id }}" // 현재 profile에 접근한 user_id //
         $(document).ready(function () {
+            // ./static/js/profile_about.js의 comments_get, user_id로 db에 검색해 작성한 댓글 리스트를 화면에 뿌려주는 역할까지
             comments_get('{{ user_info.user_id }}')
             var csrftoken = $('meta[name=csrf-token]').attr('content')
             {#var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')#}
